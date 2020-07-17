@@ -1,0 +1,57 @@
+body {
+    background: url("https://images.unsplash.com/photo-1594827661741-bb589617f0a4?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=934&q=80");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    margin: 0;
+    padding: 0 20px;
+    display: flex;
+    justify-content: center;
+    font-family: "Courier New", Courier, monospace;
+}
+
+.game {
+    text-align: center;
+    margin-top: 50px;
+}
+
+.game-title {
+    font-size: 5.5rem;
+    font-weight: bold;
+    text-shadow: 5px 5px 5px rgb(245, 222, 179, 0.8);
+}
+
+.start-button,
+.next-button {
+    margin-top: 30px;
+    cursor: pointer;
+    padding: 8px 24px;
+    background-color: wheat;
+    border: none;
+    border-radius: 4px;
+    font-size: 1.5rem;
+    font-weight: bold;
+    transition: all 0.25s ease-in-out;
+}
+
+.start-button:hover,
+.next-button:hover {
+    transform: translate3d(0, -5px, 0);
+    box-shadow: 5px 5px 15px rgb(0, 0, 0, 0.8);
+}
+
+.start-button:focus,
+.next-button:focus {
+    outline: none;
+}
+
+.game-score {
+    margin-top: 30px;
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+
+.question-card {
+    background-color: wheat;
+    padding: 20px;
+}

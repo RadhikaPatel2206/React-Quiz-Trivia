@@ -1,9 +1,44 @@
+.question-card {
+    padding: 20px;
+    margin-top: 20px;
+    border-radius: 4px;
+    background-color: wheat;
+}
+
+.question-number {
+    font-size: 2rem;
+    font-weight: bold;
+}
+
+.question-title {
+    font-size: 1.5rem;
+}
+
+.option-button {
+    margin: 10px;
+    width: 50%;
+    border: none;
+    border-radius: 4px;
+    background-color: gray;
+    color: wheat;
+    font-size: 1.5rem;
+    font-weight: bold;
+    transition: all 0.2s ease-in-out;
+}
+
+.option-button:hover {
+    transform: translate3d(-2px, -2px, 0);
+    box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.8);
+}
+.option-button:disabled {
+    cursor: not-allowed;
+    pointer-events: none;
+}
+
 .red {
     background-color: red;
-    color: red;
 }
 
 .green {
     background-color: green;
-    color: green;
 }

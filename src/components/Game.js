@@ -1,10 +1,6 @@
+import "./Game.css";
 import React, { useState } from "react";
-import {
-    Container,
-    Button,
-    Typography,
-    CircularProgress,
-} from "@material-ui/core";
+import { CircularProgress } from "@material-ui/core";
 
 import opentdb from "../api/opentdb";
 import QuestionCard from "./QuestionCard";
@@ -30,13 +26,15 @@ const GameCard = () => {
 
         const { data } = await opentdb.get();
         setQuestions(data.results.map((result) => result.question));
-        setAnswers(
-            data.results.map((result) => [
-                ...result.incorrect_answers,
-                result.correct_answer,
-            ])
-        );
         setCorrectAnswers(data.results.map((result) => result.correct_answer));
+
+        const answerList = data.results.map((result) =>
+            [...result.incorrect_answers, result.correct_answer].sort(
+                () => Math.random() - 0.5
+            )
+        );
+
+        setAnswers(answerList);
         setLoading(false);
     };
 
@@ -58,7 +56,7 @@ const GameCard = () => {
 
     const nextQuestion = () => {
         const nextQ = number + 1;
-        if (nextQ === TOTAL_QUESTIONS - 1) {
+        if (nextQ === TOTAL_QUESTIONS) {
             setGameOver(true);
         } else {
             setNumber(nextQ);
@@ -66,22 +64,21 @@ const GameCard = () => {
     };
 
     return (
-        <Container>
-            <Typography variant="h2" component="h2">
-                React Quiz Trivia
-            </Typography>
+        <div className="game">
+            <h2 className="game-title">React Quiz Trivia</h2>
 
             {gameOver || userAnswers.length === TOTAL_QUESTIONS ? (
-                <Button variant="contained" onClick={startTrivia}>
-                    Start
-                </Button>
+                <button className="start-button" onClick={startTrivia}>
+                    Start Quiz
+                </button>
             ) : null}
 
-            {loading ? <CircularProgress /> : null}
+            {loading ? <CircularProgress color="inherit" /> : null}
 
             {!loading && !gameOver && (
                 <React.Fragment>
-                    <Container>Score: {score}</Container>
+                    <h5 className="game-score">Score: {score}</h5>
+
                     <QuestionCard
                         questionNbr={number + 1}
                         totalQuestions={TOTAL_QUESTIONS}
@@ -100,11 +97,11 @@ const GameCard = () => {
             !gameOver &&
             userAnswers.length === number + 1 &&
             number !== TOTAL_QUESTIONS - 1 ? (
-                <Button onClick={nextQuestion} variant="contained">
+                <button className="next-button" onClick={nextQuestion}>
                     Next Question
-                </Button>
+                </button>
             ) : null}
-        </Container>
+        </div>
     );
 };
 

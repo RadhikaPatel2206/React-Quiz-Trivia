@@ -1,34 +1,44 @@
 import "./QuestionCard.css";
 import React from "react";
-import { Container, Typography, Fab } from "@material-ui/core";
 
 const QuestionCard = (props) => {
     const renderOptions = props.answers.map((answer) => {
+        const classProp = `option-button ${
+            props.userAnswer
+                ? answer === props.correctAnswer
+                    ? "green"
+                    : props.userAnswer === answer
+                    ? "red"
+                    : ""
+                : ""
+        }`;
+
         return (
-            <Container key={answer}>
-                <Fab
+            <div key={answer}>
+                <button
+                    className={classProp}
                     disabled={props.userAnswer ? true : false}
                     onClick={props.onClick}
                     value={answer}
-                    variant="extended"
                 >
                     <span dangerouslySetInnerHTML={{ __html: answer }} />
-                </Fab>
-            </Container>
+                </button>
+            </div>
         );
     });
 
     return (
-        <Container key={props.questionNbr}>
-            <Typography variant="h4" component="h4">
+        <div className="question-card" key={props.questionNbr}>
+            <h4 className="question-number">
                 Question {props.questionNbr} / {props.totalQuestions}
-            </Typography>
-            <Typography variant="h6" component="h6">
-                <i dangerouslySetInnerHTML={{ __html: props.question }} />
-            </Typography>
+            </h4>
+            <h6
+                className="question-title"
+                dangerouslySetInnerHTML={{ __html: props.question }}
+            />
             {renderOptions}
-            {props.userAnswer ? (
-                <Container
+            {/* {props.userAnswer ? (
+                <div
                     className={
                         props.userAnswer === props.correctAnswer
                             ? "green"
@@ -40,9 +50,9 @@ const QuestionCard = (props) => {
                             ? "Correct answer."
                             : `Wrong answer. Correct one is ${props.correctAnswer}`}
                     </i>
-                </Container>
-            ) : null}
-        </Container>
+                </div>
+            ) : null} */}
+        </div>
     );
 };
 
